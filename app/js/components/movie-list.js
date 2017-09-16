@@ -16,7 +16,6 @@ class Movie extends HTMLElement {
 			let shadowRoot = this.attachShadow({mode: 'open'});
 			shadowRoot.innerHTML = ` <slot name="movie-item"></slot> `; 
 
-			//this.movies = [...this.children];
 			let observer = new MutationObserver((mutations) => {
 				this.sortMovieItems();
 			});
@@ -24,7 +23,6 @@ class Movie extends HTMLElement {
 			this.movies.forEach(item => observer.observe(item, { attributes: true }));
 			this.sortMovieItems();
 		});
-
 	}
 }
 
