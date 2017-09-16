@@ -1,0 +1,25 @@
+{
+  "name": "my_template",
+  "description": "HTML5 starter",
+  "main": "index.js",
+  "authors": [
+    "Roland Pangu"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "HTML5"
+  ],
+  "homepage": "https://github.com/faruzzy/my_template",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^3.0.0"
+  }
+}

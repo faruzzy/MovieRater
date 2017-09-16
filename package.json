@@ -1,0 +1,33 @@
+{
+  "name": "my_template",
+  "version": "1.0.0",
+  "description": "HTML5 starter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faruzzy/my_template.git"
+  },
+  "keywords": [
+    "HTML5"
+  ],
+  "author": "Roland Pangu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/faruzzy/my_template/issues"
+  },
+  "homepage": "https://github.com/faruzzy/my_template#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.13.0",
+    "browserify": "^13.0.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-sass": "^2.3.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
