@@ -7,10 +7,10 @@ const gulp = require('gulp'),
 	sass = require('gulp-sass');
 
 gulp.task('sass', () => {
-	return gulp.src('app/scss/*.scss')
+	return gulp.src('src/scss/*.scss')
 		//.pipe(autoprefixer())
 		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-		.pipe(gulp.dest('app/css/'))
+		.pipe(gulp.dest('src/css/'))
 		.pipe(browserSync.stream());
 });
 
@@ -19,24 +19,24 @@ gulp.task('serve', () => {
 		watchOptions: {
 			ignoreInitial: true
 		},
-		files: ['app/'],
-        server: 'app/'
+		files: ['src/'],
+        server: 'src/'
     });
 });
 
 gulp.task('es6', () => {
-    browserify('app/js/app.js')
+    browserify('src/js/app.js')
         .transform('babelify', {
             presets: ['es2015']
         })
         .bundle()
         .pipe(source('app.js'))
         .pipe(buffer())
-        .pipe(gulp.dest('app/build/'));
+        .pipe(gulp.dest('src/build/'));
 });
 
 gulp.task('default', ['serve', 'es6', 'sass'], () => {
-    gulp.watch('app/**/*.html').on('change', browserSync.reload);
-    gulp.watch('app/js/**/*.js', ['es6']).on('change', browserSync.reload);
-	gulp.watch('app/scss/*.scss', ['sass']);
+    gulp.watch('src/**/*.html').on('change', browserSync.reload);
+    gulp.watch('src/js/**/*.js', ['es6']).on('change', browserSync.reload);
+	gulp.watch('src/scss/*.scss', ['sass']);
 });
