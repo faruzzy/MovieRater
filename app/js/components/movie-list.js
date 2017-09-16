@@ -7,16 +7,21 @@ class Movie extends HTMLElement {
 			});
 	}
 
+	get movies() {
+		return Array.from(this.children);
+	}
+
 	connectedCallback() {
 		customElements.whenDefined('movie-item').then(() => {
 			let shadowRoot = this.attachShadow({mode: 'open'});
 			shadowRoot.innerHTML = ` <slot name="movie-item"></slot> `; 
 
-			this.movies = [...this.children];
+			//this.movies = [...this.children];
 			let observer = new MutationObserver((mutations) => {
-				//this.sortMovieItems();
+				this.sortMovieItems();
 			});
-			this.movies.forEach(item => observer.observe(item, { childList: true }));
+
+			this.movies.forEach(item => observer.observe(item, { attributes: true }));
 			this.sortMovieItems();
 		});
 
