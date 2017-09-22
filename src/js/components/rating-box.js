@@ -22,21 +22,29 @@ class Rating extends HTMLElement {
 					background: yellow;
 				}
 			</style>
-
-			${
-				[1, 2, 3, 4, 5].map(i => {
-					return (i <= this.rating) ?  "<span class='circle filled' r=${i}></span>" : "<span class='circle' r=${i}></span>"
-				}).join('')
-			}	
+			${this.view}
 		`;
 	}
 
 	connectedCallback() {
-		[...this.shadowRoot.children].forEach((el, i) => {
+		this.children.forEach((el) => {
 			el.addEventListener('click', () => {
-				this.rating = i + 1;
+				this.rating = el.getAttribute('r');
 			});
 		});
+	}
+
+	get children() {
+		return this.shadowRoot.querySelectorAll('span');
+	}
+
+	get view() {
+		return [1, 2, 3, 4, 5].map(i => {
+			if (i <= this.rating)
+				return `<span r=${i} class='circle'></span>`;
+			else
+				return `<span r=${i} class='circle'></span>`;
+		}).join('');
 	}
 
 	static get observedAttributes() {
@@ -52,11 +60,11 @@ class Rating extends HTMLElement {
 	}
 
 	attributeChangedCallback(name, prev, curr) {
-		[...this.shadowRoot.children].forEach((el, i) => {
-			if ((i + 1) <= this.rating)
+		this.children.forEach((el, i) => {
+			if (el.matches('span') && el.getAttribute('r') <= this.rating)
 				el.classList.add('filled');
 			else
-				el.classList.toggle('filled');
+				el.classList.remove('filled');
 		});
 	}
 
