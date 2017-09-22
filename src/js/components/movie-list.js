@@ -9,18 +9,6 @@ template.innerHTML = `
 `;
 
 class Movie extends HTMLElement {
-	sortMovieItems() {
-		this.movies
-			.sort((a, b) => a.getAttribute('rating') < b.getAttribute('rating'))
-			.forEach(el => {
-				this.appendChild(el)
-			});
-	}
-
-	get movies() {
-		return Array.from(this.children);
-	}
-
 	constructor() {
 		super();
 		this.attachShadow({mode: 'open'});
@@ -35,7 +23,19 @@ class Movie extends HTMLElement {
 		this.movies.forEach(item => observer.observe(item, { attributes: true }));
 		this.sortMovieItems();
 	}
+
+	sortMovieItems() {
+		this.movies
+			.sort((a, b) => a.getAttribute('rating') < b.getAttribute('rating'))
+			.forEach(el => {
+				this.appendChild(el)
+			});
+	}
+
+	get movies() {
+		return Array.from(this.children);
+	}
 }
 
-let MovieList = customElements.define('movie-list', Movie);
+const MovieList = customElements.define('movie-list', Movie);
 export { MovieList as default };

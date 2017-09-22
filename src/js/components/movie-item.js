@@ -1,23 +1,8 @@
 class Item extends HTMLElement {
-	get rating() {
-		return this.getAttribute('rating');
-	}
-
-	set rating(val) {
-		this.setAttribute('rating', val);
-	}
-
-	get title() {
-		return this.getAttribute('title');
-	}
-
-	get ratingBox() {
-		return this.shadowRoot.querySelector('rating-box');
-	}
-
 	constructor() {
 		super();
-		let template = document.createElement('template');
+
+		const template = document.createElement('template');
 		template.innerHTML = `
 			<style>
 				:host {
@@ -41,12 +26,26 @@ class Item extends HTMLElement {
 	}
 
 	connectedCallback() {
-		
-		let observer = new MutationObserver((mutations) => {
+		const observer = new MutationObserver((mutations) => {
 			this.rating = this.ratingBox.getAttribute('rating');
 		});
-
 		observer.observe(this.ratingBox, { attributes: true });
+	}
+
+	get rating() {
+		return this.getAttribute('rating');
+	}
+
+	set rating(val) {
+		this.setAttribute('rating', val);
+	}
+
+	get title() {
+		return this.getAttribute('title');
+	}
+
+	get ratingBox() {
+		return this.shadowRoot.querySelector('rating-box');
 	}
 }
 
