@@ -5,6 +5,7 @@ class Rating extends HTMLElement {
 		this.shadowRoot.innerHTML = `
 			<style>
 				:host {
+					box-sizing: border-box;
 					display: inline-block;
 					width: 200px;
 				}

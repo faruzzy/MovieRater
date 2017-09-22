@@ -6,6 +6,7 @@ class Item extends HTMLElement {
 		template.innerHTML = `
 			<style>
 				:host {
+					box-sizing: border-box;
 					display: block;
 					border: 1px solid black;
 					width: 350px;

@@ -2,6 +2,7 @@ const template = document.createElement('template');
 template.innerHTML = `
 	<style>
 		:host {
+			box-sizing: border-box;
 			background: gray;
 		}
 	</style>
