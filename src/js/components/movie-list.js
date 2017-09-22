@@ -1,3 +1,13 @@
+const template = document.createElement('template');
+template.innerHTML = `
+	<style>
+		:host {
+			background: gray;
+		}
+	</style>
+	<slot name="movie-item"></slot>
+`;
+
 class Movie extends HTMLElement {
 	sortMovieItems() {
 		this.movies
@@ -11,18 +21,19 @@ class Movie extends HTMLElement {
 		return Array.from(this.children);
 	}
 
+	constructor() {
+		super();
+		this.attachShadow({mode: 'open'});
+		this.shadowRoot.appendChild(template.content.cloneNode(true));	
+	}
+
 	connectedCallback() {
-		customElements.whenDefined('movie-item').then(() => {
-			let shadowRoot = this.attachShadow({mode: 'open'});
-			shadowRoot.innerHTML = ` <slot name="movie-item"></slot> `; 
-
-			let observer = new MutationObserver((mutations) => {
-				this.sortMovieItems();
-			});
-
-			this.movies.forEach(item => observer.observe(item, { attributes: true }));
+		let observer = new MutationObserver((mutations) => {
 			this.sortMovieItems();
 		});
+
+		this.movies.forEach(item => observer.observe(item, { attributes: true }));
+		this.sortMovieItems();
 	}
 }
 
